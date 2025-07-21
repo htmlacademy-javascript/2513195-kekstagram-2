@@ -19,6 +19,16 @@ checkIfPalindrome('Лёша на полке клопа нашёл ');
 
 //Функция принимает строку, извлекает содержащиеся в ней цифры от 0 до 9 и возвращает их в виде целого положительного числа.
 //Если в строке нет ни одной цифры, функция должна вернуть NaN:
-function (string) {
+function extractDigits (string) {
+  let digits = '';
+  string = string.toString();
 
+  for (let i = 0; i < string.length; i++) {
+    if (string[i] >= '0' && string[i] <= '9') {
+      digits += string[i];
+    }
+  }
+  return digits === '' ? NaN : parseInt(digits, 10);
 }
+
+extractDigits ('123 привет!');
