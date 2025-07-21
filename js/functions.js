@@ -32,3 +32,18 @@ function extractDigits (string) {
 }
 
 extractDigits ('123 привет!');
+
+//вариант решения 2
+function extractDigits (string) {
+  let digits = '';
+  string = string.toString();
+
+  for (let i = 0; i < string.length; i++) {
+    if (!Number.isNaN(parseInt (string[i], 10))) {
+      digits += string[i];
+    }
+  }
+  return digits === '' ? NaN : Number(digits);
+}
+
+extractDigits ('123 привет!');
