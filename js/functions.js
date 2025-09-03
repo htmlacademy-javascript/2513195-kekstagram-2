@@ -5,10 +5,12 @@
 
 const checkStringLength = (string, maxLength) => string.length <= maxLength;
 
+// eslint-disable-next-line no-console
 console.log(checkStringLength('привет', 5)); // выдает ошибку, если равно
 
 // Функция для проверки, является ли строка палиндромом
 function checkIfPalindrome (string) {
+  // eslint-disable-next-line prefer-const
   let upperCleanedString = string.replaceAll(' ', '').toUpperCase();
   let reversedString = '';
   for (let i = upperCleanedString.length - 1; i >= 0; i--) {
@@ -17,6 +19,7 @@ function checkIfPalindrome (string) {
   return upperCleanedString === reversedString;
 }
 
+// eslint-disable-next-line no-console
 console.log(checkIfPalindrome('Лёша на полке клопа нашёл '));
 
 //Функция принимает строку, извлекает содержащиеся в ней цифры от 0 до 9 и возвращает их в виде целого положительного числа.
@@ -33,6 +36,7 @@ function extractDigits (string) {
   return parseInt(digits, 10);
 }
 
+// eslint-disable-next-line no-console
 console.log(extractDigits('123 привет!'));
 
 //вариант решения 2
@@ -48,4 +52,5 @@ function extractDigits1 (string) {
   return parseInt(digits, 10);
 }
 
+// eslint-disable-next-line no-console
 console.log(extractDigits1('sfdsdfasdfsdf'));
