@@ -1,9 +1,11 @@
 // Функция для проверки длины строки
-function checkStringLength (string, maxLength) {
-  return string.length <= maxLength;
-}
+// function checkStringLength (string, maxLength) {
+//   return string.length <= maxLength;
+// }
 
-checkStringLength('привет', 5); // выдает ошибку, если равно
+const checkStringLength = (string, maxLength) => string.length <= maxLength;
+
+console.log(checkStringLength('привет', 5)); // выдает ошибку, если равно
 
 // Функция для проверки, является ли строка палиндромом
 function checkIfPalindrome (string) {
@@ -15,7 +17,7 @@ function checkIfPalindrome (string) {
   return upperCleanedString === reversedString;
 }
 
-checkIfPalindrome('Лёша на полке клопа нашёл ');
+console.log(checkIfPalindrome('Лёша на полке клопа нашёл '));
 
 //Функция принимает строку, извлекает содержащиеся в ней цифры от 0 до 9 и возвращает их в виде целого положительного числа.
 //Если в строке нет ни одной цифры, функция должна вернуть NaN:
@@ -28,13 +30,13 @@ function extractDigits (string) {
       digits += string[i];
     }
   }
-  return digits === '' ? NaN : parseInt(digits, 10);
+  return parseInt(digits, 10);
 }
 
-extractDigits ('123 привет!');
+console.log(extractDigits('123 привет!'));
 
 //вариант решения 2
-function extractDigits (string) {
+function extractDigits1 (string) {
   let digits = '';
   string = string.toString();
 
@@ -43,7 +45,7 @@ function extractDigits (string) {
       digits += string[i];
     }
   }
-  return digits === '' ? NaN : Number(digits);
+  return parseInt(digits, 10);
 }
 
-extractDigits ('123 привет!');
+console.log(extractDigits1('sfdsdfasdfsdf'));
