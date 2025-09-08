@@ -61,6 +61,22 @@ const getRandomInteger = (a, b) => {
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
+function createRandomIdFromRangeGenerator (min, max) {
+  const previousValues = [];
+
+  return function () {
+    let currentValue = getRandomInteger(min, max);
+    if (previousValues.length >= (max - min + 1)) {
+      return null;
+    }
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomInteger(min, max);
+    }
+    previousValues.push(currentValue);
+    return currentValue;
+  };
+}
+
 // const createIdGenerator = () => {
 //   let lastGeneratedId = 0;
 //   return () => {
@@ -69,20 +85,22 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
 //   };
 // };
 
-// const i = getRandomInteger(1,25);
+
 // массив содержит
 //  {id: createIdGenerator(),
 // avatar: 'img/avatar-' + getRandomInteger(1,6) + '.svg',
 // message: getRandomArrayElement(MESSAGES),
 // name: getRandomArrayElement(NAMES),}
 
-const generatePhotoData = (i) => ({
-  id: i,
-  url: `photos/${ i }.jpg`,
-  description: `Моя фотография №${ i}`,
-  likes: getRandomInteger(15,200),
-  comments: []
-}
-);
+const generatePhotoData = () => {
+  const i = createRandomIdFromRangeGenerator(1,25);
+  return {
+    id: i,
+    url: `photos/${ i }.jpg`,
+    description: `Моя фотография №${ i}`,
+    likes: getRandomInteger(15,200),
+    comments: []
+  };
+};
 
 const similarPhotos = Array.from({length: SIMILAR_PHOTO_COUNT}, generatePhotoData);
