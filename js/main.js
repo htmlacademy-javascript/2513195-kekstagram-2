@@ -56,12 +56,13 @@ const SIMILAR_PHOTO_COUNT = 25;
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
-  const result = Math.random() * (upper - lower + 1) + lower; return Math.floor(result);
+  const result = Math.random() * (upper - lower + 1) + lower;
+  return Math.floor(result);
 };
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-function createRandomIdFromRangeGenerator (min, max) {
+function createRandomIdFromRangeGenerator(min, max) {
   const previousValues = [];
 
   return function () {
@@ -75,32 +76,49 @@ function createRandomIdFromRangeGenerator (min, max) {
     previousValues.push(currentValue);
     return currentValue;
   };
-}
+};
 
-// const createIdGenerator = () => {
-//   let lastGeneratedId = 0;
-//   return () => {
-//     lastGeneratedId += 1;
-//     return lastGeneratedId;
-//   };
-// };
+const getUniqueId = createRandomIdFromRangeGenerator(1, 25);
 
 
-// массив содержит
-//  {id: createIdGenerator(),
-// avatar: 'img/avatar-' + getRandomInteger(1,6) + '.svg',
-// message: getRandomArrayElement(MESSAGES),
-// name: getRandomArrayElement(NAMES),}
-
-const generatePhotoData = () => {
-  const i = createRandomIdFromRangeGenerator(1,25);
-  return {
-    id: i,
-    url: `photos/${ i }.jpg`,
-    description: `Моя фотография №${ i}`,
-    likes: getRandomInteger(15,200),
-    comments: []
+const createIdGenerator = () => {
+  let lastGeneratedId = 0;
+  return () => {
+    lastGeneratedId += 1;
+    return lastGeneratedId;
   };
 };
 
-const similarPhotos = Array.from({length: SIMILAR_PHOTO_COUNT}, generatePhotoData);
+const getCommentId = createIdGenerator();
+
+const getComment = () => ({
+  id: getCommentId(),
+  avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
+  message: getRandomArrayElement(MESSAGES),
+  name: getRandomArrayElement(NAMES)
+});
+
+
+const generatePhotoData = () => {
+  const i = getUniqueId();
+  return {
+    id: i,
+    url: `photos/${i}.jpg`,
+    description: `Моя фотография №${i}`,
+    likes: getRandomInteger(15, 200),
+    comments: Array.from({ length: getRandomInteger(0, 30) }, getComment)
+  };
+};
+
+const similarPhotos = Array.from({ length: SIMILAR_PHOTO_COUNT }, generatePhotoData);
+
+
+// const getPhotos = () => {
+//   const photos = [];
+//   for (let i = 1; i <= SIMILAR_PHOTO_COUNT; i++) {
+//     photos.push(generatePhotoData(i))
+//   }
+//   return photos;
+// };
+
+
