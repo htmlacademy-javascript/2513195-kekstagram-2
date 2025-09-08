@@ -70,22 +70,19 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
 // };
 
 // const i = getRandomInteger(1,25);
+// массив содержит
+//  {id: createIdGenerator(),
+// avatar: 'img/avatar-' + getRandomInteger(1,6) + '.svg',
+// message: getRandomArrayElement(MESSAGES),
+// name: getRandomArrayElement(NAMES),}
 
-const generatePhotoData = () => ({
-
-  return: {
-    id: i,
-    url: 'photos/' + i + '.jpg',
-    description: 'Моя фотография №' + i,
-    likes: getRandomInteger(15,200),
-    comments: [
-      {id: createIdGenerator(),
-      avatar: 'img/avatar-' + getRandomInteger(1,6) + '.svg',
-      message: getRandomArrayElement(MESSAGES),
-      name: getRandomArrayElement(NAMES),}
-  ]
-};
-};
-)
+const generatePhotoData = (i) => ({
+  id: i,
+  url: `photos/${ i }.jpg`,
+  description: `Моя фотография №${ i}`,
+  likes: getRandomInteger(15,200),
+  comments: []
+}
+);
 
 const similarPhotos = Array.from({length: SIMILAR_PHOTO_COUNT}, generatePhotoData);
