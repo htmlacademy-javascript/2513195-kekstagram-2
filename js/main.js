@@ -1,36 +1,3 @@
-// Нам нужен массив из 25 объектов, каждый объект — это фотография с полями:
-// id — уникальный идентификатор от 1 до 25
-// url — 'photos/{{i}}.jpg'
-// description — строка (можно придумать)
-// likes — случайное число от 15 до 200
-// comments — массив объектов с полями:
-// id — уникальный идентификатор
-// avatar — 'img/avatar-{{1..6}}.svg'
-// message — одно или два случайных предложения
-// name — случайное имя
-// {
-//   id: ,           // уникальный идентификатор фотографии
-//   url: '',        // адрес картинки вида photos/{{i}}.jpg
-//   description: '',// описание фотографии
-//   likes: ,        // количество лайков (число)
-//   comments: [     // массив комментариев
-//     {
-//       id: ,       // уникальный идентификатор комментария
-//       avatar: '', // адрес аватарки вида img/avatar-{{1..6}}.svg
-//       message: '',// текст комментария
-//       name: ''    // имя автора комментария
-//     },
-//     {
-//       id: ,       // уникальный идентификатор комментария
-//       avatar: '', // адрес аватарки вида img/avatar-{{1..6}}.svg
-//       message: '',// текст комментария
-//       name: ''    // имя автора комментария
-//     },
-//     // ...другие комментарии
-//   ]
-// }
-
-
 const NAMES = [
   'Гарри',
   'Гермиона',
@@ -51,7 +18,19 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const SIMILAR_PHOTO_COUNT = 25;
+const PHOTOS_COUNT = 25;
+
+const MIN_LIKES = 15;
+const MAX_LIKES = 200;
+
+const MIN_COMMENTS_AMOUNT = 0;
+const MAX_COMMENTS_AMOUNT = 30;
+
+const MIN_PHOTO_ID = 1;
+const MAX_PHOTO_ID = 25;
+
+const MIN_AVATAR_ID = 1;
+const MAX_AVATAR_ID = 6;
 
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -76,10 +55,9 @@ function createRandomIdFromRangeGenerator(min, max) {
     previousValues.push(currentValue);
     return currentValue;
   };
-};
+}
 
-const getUniqueId = createRandomIdFromRangeGenerator(1, 25);
-
+const getUniqueId = createRandomIdFromRangeGenerator(MIN_PHOTO_ID, MAX_PHOTO_ID);
 
 const createIdGenerator = () => {
   let lastGeneratedId = 0;
@@ -93,29 +71,29 @@ const getCommentId = createIdGenerator();
 
 const getComment = () => ({
   id: getCommentId(),
-  avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
+  avatar: `img/avatar-${getRandomInteger(MIN_AVATAR_ID, MAX_AVATAR_ID)}.svg`,
   message: getRandomArrayElement(MESSAGES),
   name: getRandomArrayElement(NAMES)
 });
 
 
 const generatePhotoData = () => {
-  const i = getUniqueId();
+  const photoID = getUniqueId();
   return {
-    id: i,
-    url: `photos/${i}.jpg`,
-    description: `Моя фотография №${i}`,
-    likes: getRandomInteger(15, 200),
-    comments: Array.from({ length: getRandomInteger(0, 30) }, getComment)
+    id: photoID,
+    url: `photos/${photoID}.jpg`,
+    description: `Моя фотография №${photoID}`,
+    likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
+    comments: Array.from({ length: getRandomInteger(MIN_COMMENTS_AMOUNT, MAX_COMMENTS_AMOUNT) }, getComment)
   };
 };
 
-const similarPhotos = Array.from({ length: SIMILAR_PHOTO_COUNT }, generatePhotoData);
+const arrayPhotos = Array.from({ length: PHOTOS_COUNT }, generatePhotoData);
 
 
 // const getPhotos = () => {
 //   const photos = [];
-//   for (let i = 1; i <= SIMILAR_PHOTO_COUNT; i++) {
+//   for (let i = 1; i <= PHOTOS_COUNT; i++) {
 //     photos.push(generatePhotoData(i))
 //   }
 //   return photos;
