@@ -1,3 +1,27 @@
+/* eslint-disable no-console */
+
+//5.16. Функции возвращаются
+
+function isMeetingWithinWorkday(workStart, workEnd, meetingStart, duration) {
+  // вспомогательная функция: преобразует строку "часы:минуты" в минуты от начала суток
+  function toMinutes(timeStr) {
+    const [h, m] = timeStr.split(':').map(Number);
+    return h * 60 + m;
+  }
+
+  const workStartMin = toMinutes(workStart);
+  const workEndMin = toMinutes(workEnd);
+  const meetingStartMin = toMinutes(meetingStart);
+  const meetingEndMin = meetingStartMin + duration;
+
+  return meetingStartMin >= workStartMin && meetingEndMin <= workEndMin;
+}
+
+console.log(isMeetingWithinWorkday('08:00', '17:30', '14:00', 90));
+console.log(isMeetingWithinWorkday('8:0', '10:0', '8:0', 120));
+console.log(isMeetingWithinWorkday('08:00', '14:30', '14:00', 90));
+console.log(isMeetingWithinWorkday('8:00', '17:30', '08:00', 900));
+
 // Функция для проверки длины строки
 // function checkStringLength (string, maxLength) {
 //   return string.length <= maxLength;
@@ -54,3 +78,4 @@ function extractDigits1 (string) {
 
 // eslint-disable-next-line no-console
 console.log(extractDigits1('sfdsdfasdfsdf'));
+
