@@ -29,4 +29,4 @@ const generatePhotoData = () => {
   };
 };
 
-const arrayPhotos = Array.from({ length: PHOTOS_COUNT }, generatePhotoData);
+export const arrayPhotos = Array.from({ length: PHOTOS_COUNT }, generatePhotoData);
