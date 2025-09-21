@@ -27,7 +27,7 @@ function createPictureElement({url, description, likes, comments}) {
   img.alt = description;
 
   pictureElement.querySelector('.picture__likes').textContent = likes;
-  pictureElement.querySelector('.picture__comments').textContent = comments;
+  pictureElement.querySelector('.picture__comments').textContent = comments.length;
 
   return pictureElement;
 }
