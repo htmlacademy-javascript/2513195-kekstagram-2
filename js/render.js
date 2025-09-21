@@ -19,7 +19,7 @@ const picturesContainer = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
 // Функция для создания миниатюры
-function createPictureElement({url, description, likes, comments}) {
+const createPictureElement = ({url, description, likes, comments}) => {
   const pictureElement = pictureTemplate.cloneNode(true);
 
   const img = pictureElement.querySelector('.picture__img');
@@ -30,10 +30,10 @@ function createPictureElement({url, description, likes, comments}) {
   pictureElement.querySelector('.picture__comments').textContent = comments.length;
 
   return pictureElement;
-}
+};
 
 // Функция для отрисовки всех фотографий
-export function renderPictures(pictures) {
+export const renderPictures = (pictures) => {
   const fragment = document.createDocumentFragment();
 
   pictures.forEach((photo) => {
@@ -42,4 +42,4 @@ export function renderPictures(pictures) {
   });
 
   picturesContainer.appendChild(fragment);
-}
+};
