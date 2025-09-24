@@ -29,7 +29,7 @@ const createCommentElement = ({ avatar, name, message }) => {
   return li;
 };
 
-// Показываем следующую партию комментариев
+// Показываем следующие комментарии
 const renderComments = () => {
   const fragment = document.createDocumentFragment();
   const nextComments = comments.slice(shownCommentsCount, shownCommentsCount + COMMENTS_STEP);
