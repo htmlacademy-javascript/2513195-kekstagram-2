@@ -34,3 +34,5 @@ export const MAX_AVATAR_ID = 6;
 
 export const MIN_MESSAGES_AMOUNT = 1;
 export const MAX_MESSAGES_AMOUNT = 1;
+
+export const COMMENTS_STEP = 5;
