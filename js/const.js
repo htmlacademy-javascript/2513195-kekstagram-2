@@ -36,3 +36,7 @@ export const MIN_MESSAGES_AMOUNT = 1;
 export const MAX_MESSAGES_AMOUNT = 1;
 
 export const COMMENTS_STEP = 5;
+
+export const COMMENT_MAX_LENGTH = 140;
+export const MAX_HASHTAGS = 5;
+export const HASHTAGS_REGEXP = /^#[a-zа-яё0-9]{1,19}$/i;
