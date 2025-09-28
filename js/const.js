@@ -40,3 +40,8 @@ export const COMMENTS_STEP = 5;
 export const COMMENT_MAX_LENGTH = 140;
 export const MAX_HASHTAGS = 5;
 export const HASHTAGS_REGEXP = /^#[a-zа-яё0-9]{1,19}$/i;
+
+export const INVALID_DESCRIPTION = `Комментарий не должен превышать ${COMMENT_MAX_LENGTH} символов`;
+export const INVALID_HASHTAG_UNIQUE = 'Нельзя повторять хэштеги';
+export const INVALID_HASHTAG_SYMBOLS = 'Хештег начинается с # и состоит только из букв и цифр длиной не больше 20 символов';
+export const INVALID_HASHTAG_COUNT = `Нельзя добавлять больше ${MAX_HASHTAGS} хэштегов`;
