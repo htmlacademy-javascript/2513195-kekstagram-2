@@ -46,5 +46,6 @@ const pristine = new Pristine(uploadForm, {
   errorTextClass: 'img-upload__field-wrapper--error'
 });
 
-pristine.addValidator();
+const validateComment = (value) => value.length <= COMMENT_MAX_LENGTH;
+pristine.addValidator(commentInput, validateComment, 'Комментарий не должен превышать 140 символов');
 
