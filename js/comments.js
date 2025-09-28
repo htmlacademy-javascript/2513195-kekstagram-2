@@ -1,57 +1,50 @@
 import { COMMENTS_STEP } from './const.js';
 
-// Контейнеры для комментариев и счетчики
 const commentsListElement = document.querySelector('.social__comments');
 const shownCountElement = document.querySelector('.social__comment-shown-count');
 const totalCountElement = document.querySelector('.social__comment-total-count');
 const commentsLoader = document.querySelector('.comments-loader');
 
-// Хранилище комментариев и счетчик показанных
+// Берём первый комментарий как шаблон
+const commentTemplate = commentsListElement.querySelector('.social__comment');
+
+// Хранилище комментариев и счётчик показанных
 let comments = [];
 let shownCommentsCount = 0;
 
+// Создание элемента комментария через шаблон
 const createCommentElement = ({ avatar, name, message }) => {
-  const li = document.createElement('li');
-  li.classList.add('social__comment');
+  const commentElement = commentTemplate.cloneNode(true);
 
-  const img = document.createElement('img');
-  img.classList.add('social__picture');
+  const img = commentElement.querySelector('.social__picture');
   img.src = avatar;
   img.alt = name;
-  img.width = 35;
-  img.height = 35;
 
-  const text = document.createElement('p');
-  text.classList.add('social__text');
-  text.textContent = message;
+  const p = commentElement.querySelector('.social__text');
+  p.textContent = message;
 
-  li.append(img, text);
-  return li;
+  return commentElement;
 };
 
-// Показываем следующие комментарии
+// Рендер следующей порции комментариев
 const renderComments = () => {
   const fragment = document.createDocumentFragment();
   const nextComments = comments.slice(shownCommentsCount, shownCommentsCount + COMMENTS_STEP);
 
   nextComments.forEach((comment) => {
-    fragment.append(createCommentElement(comment));
+    fragment.appendChild(createCommentElement(comment));
   });
 
-  commentsListElement.append(fragment);
+  commentsListElement.appendChild(fragment);
   shownCommentsCount += nextComments.length;
 
   shownCountElement.textContent = shownCommentsCount;
   totalCountElement.textContent = comments.length;
 
-  if (shownCommentsCount >= comments.length) {
-    commentsLoader.classList.add('hidden');
-  } else {
-    commentsLoader.classList.remove('hidden');
-  }
+  commentsLoader.classList.toggle('hidden', shownCommentsCount >= comments.length);
 };
 
-// Показ комментариев при открытии big picture
+// Инициализация комментариев при открытии big picture
 export const initComments = (data) => {
   comments = data;
   shownCommentsCount = 0;
@@ -67,5 +60,5 @@ export const resetComments = () => {
   commentsLoader.classList.remove('hidden');
 };
 
-// Обработчик кнопки "Загрузить ещё"
+// Кнопка "Загрузить ещё"
 commentsLoader.addEventListener('click', renderComments);
