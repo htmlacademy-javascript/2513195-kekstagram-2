@@ -35,6 +35,8 @@ export const initUploadPhotoModal = () => {
   });
 };
 
+
+//Валидация формы
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
@@ -42,7 +44,6 @@ const pristine = new Pristine(uploadForm, {
 });
 
 const validateComment = (value) => value.length <= COMMENT_MAX_LENGTH;
-pristine.addValidator(commentInput, validateComment, INVALID_DESCRIPTION);
 
 const arrayHashtags = (value) => value.trim().toLowerCase().split(' ').filter((hashtag) => hashtag);
 
@@ -53,4 +54,12 @@ const isUniqueHashtags = (value) => {
 
 const isCorrectHashtags = (value) => arrayHashtags(value).every((hashtag) => HASHTAGS_REGEXP.test(hashtag));
 const isCorrectAmountHashtags = (value) => arrayHashtags(value).length <= MAX_HASHTAGS;
+
+const setPristine = () => {
+  pristine.addValidator(hashtagInput, isUniqueHashtags, INVALID_HASHTAG_UNIQUE);
+  pristine.addValidator(hashtagInput, isCorrectHashtags, INVALID_HASHTAG_SYMBOLS);
+  pristine.addValidator(hashtagInput, isCorrectAmountHashtags, INVALID_HASHTAG_COUNT);
+  pristine.addValidator(commentInput, validateComment, INVALID_DESCRIPTION);
+};
+
 
