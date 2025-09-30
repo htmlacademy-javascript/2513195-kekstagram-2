@@ -5,14 +5,11 @@ const shownCountElement = document.querySelector('.social__comment-shown-count')
 const totalCountElement = document.querySelector('.social__comment-total-count');
 const commentsLoader = document.querySelector('.comments-loader');
 
-// Берём первый комментарий как шаблон
 const commentTemplate = commentsListElement.querySelector('.social__comment');
 
-// Хранилище комментариев и счётчик показанных
 let comments = [];
 let shownCommentsCount = 0;
 
-// Создание элемента комментария через шаблон
 const createCommentElement = ({ avatar, name, message }) => {
   const commentElement = commentTemplate.cloneNode(true);
 
@@ -26,7 +23,6 @@ const createCommentElement = ({ avatar, name, message }) => {
   return commentElement;
 };
 
-// Рендер следующей порции комментариев
 const renderComments = () => {
   const fragment = document.createDocumentFragment();
   const nextComments = comments.slice(shownCommentsCount, shownCommentsCount + COMMENTS_STEP);
@@ -44,7 +40,6 @@ const renderComments = () => {
   commentsLoader.classList.toggle('hidden', shownCommentsCount >= comments.length);
 };
 
-// Инициализация комментариев при открытии big picture
 export const initComments = (data) => {
   comments = data;
   shownCommentsCount = 0;
@@ -52,7 +47,6 @@ export const initComments = (data) => {
   renderComments();
 };
 
-// Сброс комментариев при закрытии big picture
 export const resetComments = () => {
   comments = [];
   shownCommentsCount = 0;
@@ -60,5 +54,4 @@ export const resetComments = () => {
   commentsLoader.classList.remove('hidden');
 };
 
-// Кнопка "Загрузить ещё"
 commentsLoader.addEventListener('click', renderComments);
