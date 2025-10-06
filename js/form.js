@@ -7,6 +7,8 @@ export const uploadForm = document.querySelector('.img-upload__form');
 const uploadFileControl = uploadForm.querySelector('#upload-file');
 const photoEditorForm = uploadForm.querySelector('.img-upload__overlay');
 const photoEditorResetBtn = photoEditorForm.querySelector('#upload-cancel');
+const hashtagInput = uploadForm.querySelector('.text__hashtags');
+const commentInput = uploadForm.querySelector('.text__description');
 
 const onPhotoEditorResetBtnClick = (evt) => {
   evt.preventDefault();
@@ -15,8 +17,12 @@ const onPhotoEditorResetBtnClick = (evt) => {
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closePhotoEditor();
+    if (document.activeElement === hashtagInput || document.activeElement === commentInput) {
+      evt.stopPropagation();
+    } else {
+      evt.preventDefault();
+      closePhotoEditor();
+    }
   }
 };
 
