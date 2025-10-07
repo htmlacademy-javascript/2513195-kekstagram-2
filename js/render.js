@@ -3,7 +3,6 @@ import { openBigPicture } from './big-picture';
 const picturesContainer = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-// Создание элемента одной миниатюры
 const createPictureElement = ({ url, description, likes, comments }) => {
   const pictureElement = pictureTemplate.cloneNode(true);
 
@@ -14,7 +13,6 @@ const createPictureElement = ({ url, description, likes, comments }) => {
   pictureElement.querySelector('.picture__likes').textContent = likes;
   pictureElement.querySelector('.picture__comments').textContent = comments.length;
 
-  //Обработчик клика по миниатюре: открываем big picture
   pictureElement.addEventListener('click', () => {
     openBigPicture({ url, description, likes, comments });
   });
@@ -22,8 +20,14 @@ const createPictureElement = ({ url, description, likes, comments }) => {
   return pictureElement;
 };
 
-// Рендер всех миниатюр
+const clearOldPictures = () => {
+  picturesContainer.querySelectorAll('.picture').forEach((item) => {
+    item.remove();
+  });
+};
+
 export const renderPictures = (pictures) => {
+  clearOldPictures();
   const fragment = document.createDocumentFragment();
 
   pictures.forEach((photo) => {

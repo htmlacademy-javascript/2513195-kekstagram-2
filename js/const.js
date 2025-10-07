@@ -110,3 +110,17 @@ export const SubmitButtonText = {
   IDLE: 'Опубликовать',
   SUBMITTING: 'Публикую...'
 };
+
+export const API_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
+export const EndPoints = {
+  GET: '/data',
+  POST: '/'
+};
+
+export const Filters = {
+  DEFAULT: 'filter-default',
+  RANDOM: 'filter-random',
+  DISCUSSED: 'filter-discussed'
+};
+
+export const RANDOM_COUNT = 10;
