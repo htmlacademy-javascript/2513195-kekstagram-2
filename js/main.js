@@ -1,3 +1,4 @@
+//проект kekstagram
 import { renderPictures } from './render.js';
 import { initUploadPhotoModal } from './form.js';
 import { getPhotos } from './api.js';
